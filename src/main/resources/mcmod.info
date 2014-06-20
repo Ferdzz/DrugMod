@@ -1,0 +1,16 @@
+[
+{
+  "modid": "DrugsMod",
+  "name": "Drugs Mod",
+  "description": "Don't do drugs kids",
+  "version": "First",
+  "mcversion": "${mcversion}",
+  "url": "http://www.minecraftforum.net/topic/2667373-172-forge-sspsmp-drugs-mod-wip/",
+  "updateUrl": "",
+  "authors": ["Stuntmania"],
+  "credits": "Stuntmania (code and idea) Gogpatrie (textures)",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
