@@ -28,7 +28,6 @@ public class ItemStraw extends Item {
 				player.attackEntityFrom(new DamageSource("strawkill"), 4);
 			}
 			player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id, 1000, 5));
-			player.addPotionEffect(new PotionEffect(Potion.digSpeed.id, 1000, 5));
 
 			return true;
 		}

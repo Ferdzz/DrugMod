@@ -9,20 +9,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 
 import com.publicstaticfinalgames.drugs.blocks.CannabisPlantBlock;
 import com.publicstaticfinalgames.drugs.blocks.CocaPlantBlock;
 import com.publicstaticfinalgames.drugs.blocks.CocaineTraceBlock;
 import com.publicstaticfinalgames.drugs.blocks.DryingRack;
 import com.publicstaticfinalgames.drugs.blocks.Grinder;
-import com.publicstaticfinalgames.drugs.dimensions.HighWorldGenerator;
 import com.publicstaticfinalgames.drugs.items.ItemCocaine;
 import com.publicstaticfinalgames.drugs.items.ItemCookedBrownie;
 import com.publicstaticfinalgames.drugs.items.ItemFilledPipe;
 import com.publicstaticfinalgames.drugs.items.ItemJoint;
-import com.publicstaticfinalgames.drugs.items.ItemMagicMush;
 import com.publicstaticfinalgames.drugs.items.ItemStraw;
 
 import cpw.mods.fml.common.Mod;
@@ -44,9 +40,7 @@ public class Main {
 
 	@Instance
 	public static Main instance;
-	
-	public static HighWorldGenerator highWorldGen;
-	
+
 	public static Block cocaineTrace;
 	public static Block cannabisPlantBlock;
 	public static Block cocaPlantBlock;
@@ -67,7 +61,6 @@ public class Main {
 	public static Item filledPipe;
 	public static Item joint;
 	public static Item straw;
-	public static Item magicMush;
 
 	public static final CreativeTabs drugsTab = new CreativeTabs("drugmodTab") {
 		public Item getTabIconItem() {
@@ -77,7 +70,7 @@ public class Main {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		
+
 		/*
 		 * 
 		 * Blocks
@@ -99,20 +92,19 @@ public class Main {
 		 * Items
 		 */
 		straw = new ItemStraw().setUnlocalizedName("straw").setCreativeTab(drugsTab).setMaxStackSize(1).setMaxDamage(20).setTextureName(MODID + ":" + "straw");
-		pipe = new Item().setUnlocalizedName("pipe").setCreativeTab(drugsTab).setMaxStackSize(1).setTextureName(MODID + ":" + "emptyPipe");
-		filledPipe = new ItemFilledPipe().setUnlocalizedName("filledPipe").setCreativeTab(drugsTab).setMaxStackSize(1).setTextureName(MODID + ":" + "filledPipe");
-		cannabisCookedBrownie = new ItemCookedBrownie(6, false).setUnlocalizedName("cannabisCookedBrownie").setCreativeTab(drugsTab).setTextureName(MODID + ":" +"cookedBrownie");
-		cannabisSeed = new ItemSeeds(cannabisPlantBlock, Blocks.farmland).setUnlocalizedName("cannabisSeed").setCreativeTab(drugsTab).setTextureName(MODID + ":"+ "cannabisSeeds");
+		pipe = new Item().setUnlocalizedName("pipe").setCreativeTab(drugsTab).setMaxStackSize(1);
+		filledPipe = new ItemFilledPipe().setUnlocalizedName("filledPipe").setCreativeTab(drugsTab).setMaxStackSize(1);
+		cannabisCookedBrownie = new ItemCookedBrownie(6, false).setUnlocalizedName("cannabisCookedBrownie").setCreativeTab(drugsTab);
+		cannabisSeed = new ItemSeeds(cannabisPlantBlock, Blocks.farmland).setUnlocalizedName("cannabisSeed").setCreativeTab(drugsTab);
 		cannabisLeave = new Item().setUnlocalizedName("weed1").setCreativeTab(drugsTab).setTextureName(MODID + ":" + "cannabisLeave");
 		cannabisGrinded = new Item().setUnlocalizedName("grindedCannabis").setCreativeTab(drugsTab);
 		cannabisDryied = new Item().setUnlocalizedName("cannabisDryied").setCreativeTab(drugsTab);
-		cannabisBrownie = new Item().setUnlocalizedName("cannabisBrownie").setCreativeTab(drugsTab).setTextureName(MODID + ":" + "uncookedBrownie");
+		cannabisBrownie = new Item().setUnlocalizedName("cannabisBrownie").setCreativeTab(drugsTab);
 		cocaine = new ItemCocaine().setUnlocalizedName("cocaine").setCreativeTab(drugsTab).setTextureName(MODID + ":" + "cocaine");
 		cocaineLeave = new Item().setUnlocalizedName("cocaineLeave").setCreativeTab(drugsTab).setTextureName(MODID + ":" + "cocaineLeaf");
 		cocaSeed = new ItemSeeds(cocaPlantBlock, Blocks.farmland).setUnlocalizedName("cocaineSeed").setCreativeTab(drugsTab).setTextureName(MODID + ":" + "cocaSeeds");
 		cocainePaste = new Item().setUnlocalizedName("cocainePaste").setCreativeTab(drugsTab).setTextureName(MODID + ":" + "cocainePaste");
 		joint = new ItemJoint().setUnlocalizedName("joint").setMaxStackSize(1).setCreativeTab(drugsTab).setTextureName(MODID + ":" + "joint");
-		magicMush = new ItemMagicMush(2, false).setAlwaysEdible().setUnlocalizedName("magicMush").setCreativeTab(drugsTab).setTextureName(MODID + ":" + "magicMush");
 		GameRegistry.registerItem(straw, "straw");
 		GameRegistry.registerItem(cocaine, "cocaine");
 		GameRegistry.registerItem(cocaSeed, "cocaineSeed");
@@ -127,7 +119,6 @@ public class Main {
 		GameRegistry.registerItem(pipe, "pipe");
 		GameRegistry.registerItem(filledPipe, "filledPipe");
 		GameRegistry.registerItem(joint, "joint");
-		GameRegistry.registerItem(magicMush, "magicMush");
 
 		/*
 		 * 
@@ -194,14 +185,7 @@ public class Main {
 		});
 
 		GameRegistry.addSmelting(cannabisBrownie, new ItemStack(cannabisCookedBrownie, 1), 0);
-		
-		highWorldGen = new HighWorldGenerator();
-		DimensionManager.registerProviderType(highWorldGen.dimensionId, HighWorldGenerator.class, false);
-		DimensionManager.createProviderFor(highWorldGen.dimensionId);
-		DimensionManager.registerDimension(highWorldGen.dimensionId, highWorldGen.dimensionId);
-		
-		MinecraftForge.addGrassSeed(new ItemStack(cannabisSeed, 1), 8);
-		MinecraftForge.addGrassSeed(new ItemStack(cocaSeed, 1), 8);
+
 		proxy.registerRenderers();
 	}
 
