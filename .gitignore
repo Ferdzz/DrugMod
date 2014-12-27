@@ -34,13 +34,9 @@ Icon
 .Spotlight-V100
 .Trashes
 
-.classpath
 .gradle
-.project
 build
 build.gradle
 gradlew
 gradlew.bat
-.settings
-bin
 gradle
