@@ -34,6 +34,7 @@ Icon
 .Spotlight-V100
 .Trashes
 
+eclipse
 .classpath
 .gradle
 .project
@@ -44,3 +45,9 @@ gradlew.bat
 .settings
 bin
 gradle
+CREDITS-fml.txt
+forge-1.7.10-10.13.2.1230-changelog.txt
+LICENSE-fml.txt
+MinecraftForge-Credits.txt
+MinecraftForge-License.txt
+README.txt
